@@ -58,7 +58,7 @@ fun RecipeDetailScreen(
             .fillMaxSize()
             .background(Background)
     ) {
-        // 1. Верхний тулбар
+        // Верхний тулбар
         Box(
             modifier = Modifier
                 .fillMaxWidth()

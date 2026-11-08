@@ -131,7 +131,7 @@ fun ProductsScreen(
                     .padding(start = 8.dp)
                     .size(40.dp)
                     .clip(RoundedCornerShape(12.dp))
-                    .background(Color(0xFF4A4A4A)), // цвет кнопки серый, но у меня есть другой + оранжевый хорошо выглядит
+                    .background(Color(0xFF4A4A4A)),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(Icons.Default.Search,
@@ -190,14 +190,14 @@ fun ProductsScreen(
                 modifier = Modifier
                     .size(56.dp)
                     .clip(RoundedCornerShape(16.dp))
-                    .background(Color(0xFF4A4A4A)) // тоже самое
+                    .background(Color(0xFF4A4A4A))
                     .clickable { onAddProductClick() },
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Добавить",
-                    tint = Color.White, // тоже самое
+                    tint = Color.White,
                     modifier = Modifier.size(32.dp)
                 )
             }
@@ -220,13 +220,13 @@ fun ProductsScreen(
                 modifier = Modifier
                     .size(40.dp)
                     .clip(RoundedCornerShape(12.dp))
-                    .background(Color(0xFF4A4A4A)), // тоже самое
+                    .background(Color(0xFF4A4A4A)),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                     contentDescription = "Далее",
-                    tint = Color.White // тоже самое
+                    tint = Color.White
                 )
             }
         }

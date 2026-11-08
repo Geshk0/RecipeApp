@@ -1,5 +1,6 @@
 package com.example.myapplication.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -46,24 +47,27 @@ import com.example.myapplication.ui.theme.TextPrimary
 import com.example.myapplication.ui.theme.TextSecondaryAndIcons
 import kotlinx.coroutines.delay
 import androidx.compose.foundation.Image
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.layout.ContentScale
+import kotlin.time.Duration.Companion.milliseconds
 
+@SuppressLint("DefaultLocale")
 @Composable
 fun CookingStepsScreen(recipeTitle: String, stepsImage: List<Int>, onBackClick: () -> Unit, onFinishClick: () -> Unit) {
 
     // Состояние текущего шага (от 1 до 5)
-    var currentStep by remember { mutableStateOf(1) }
+    var currentStep by remember { mutableIntStateOf(1) }
     val totalSteps = 5
 
     // Таймер
-    var timeLeft by remember { mutableStateOf(300) } // 300 секунд = 5 минут
+    var timeLeft by remember { mutableIntStateOf(300) } // 300 секунд = 5 минут
     var isTimerRunning by remember { mutableStateOf(false) }
 
     LaunchedEffect(isTimerRunning) {
         if (isTimerRunning && timeLeft > 0) {
             while (timeLeft > 0 && isTimerRunning) {
-                delay(1000L)
+                delay(1000L.milliseconds)
                 timeLeft--
             }
             if (timeLeft == 0) isTimerRunning = false
@@ -118,7 +122,7 @@ fun CookingStepsScreen(recipeTitle: String, stepsImage: List<Int>, onBackClick: 
                     .fillMaxWidth()
                     .height(4.dp)
                     .clip(RoundedCornerShape(2.dp)),
-                color = PrimaryContainer, // Или AccentOrange
+                color = PrimaryContainer,
                 trackColor = BorderOutline
             )
             Spacer(modifier = Modifier.height(8.dp))
@@ -145,7 +149,7 @@ fun CookingStepsScreen(recipeTitle: String, stepsImage: List<Int>, onBackClick: 
             }
 
             if (currentImageRes != 0) {
-                // Если картинка есть — показываем её
+                // Если картинка есть - показываем её
                 Image(
                     painter = painterResource(id = currentImageRes),
                     contentDescription = "Фото шага $currentStep",
@@ -156,7 +160,7 @@ fun CookingStepsScreen(recipeTitle: String, stepsImage: List<Int>, onBackClick: 
                         .clip(RoundedCornerShape(16.dp))
                 )
             } else {
-                // Если картинки нет — показываем красивую заглушку
+                // Заглушка
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -223,7 +227,7 @@ fun CookingStepsScreen(recipeTitle: String, stepsImage: List<Int>, onBackClick: 
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(12.dp))
-                    .background(Color(0xFFFFF3E0)) // Светло-оранжевый
+                    .background(Color(0xFFFFF3E0))
                     .border(1.dp, Color(0xFFFFE0B2), RoundedCornerShape(12.dp))
                     .padding(16.dp)
             ) {
@@ -268,7 +272,7 @@ fun CookingStepsScreen(recipeTitle: String, stepsImage: List<Int>, onBackClick: 
             Button(
                 onClick = {
                     if (currentStep < totalSteps) currentStep++
-                    else onFinishClick() // НОВОЕ: Если шаг последний, вызываем завершение
+                    else onFinishClick()
                 },
                 modifier = Modifier.weight(1f).height(56.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = AccentOrange),

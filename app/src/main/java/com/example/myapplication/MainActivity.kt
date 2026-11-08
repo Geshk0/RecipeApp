@@ -19,6 +19,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -37,6 +38,7 @@ import com.example.myapplication.screens.ProfileScreen
 import com.example.myapplication.screens.RecipeDetailScreen
 import com.example.myapplication.screens.RecipesScreen
 import com.example.myapplication.screens.ShoppingListScreen
+import androidx.core.content.edit
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +67,7 @@ fun MainScreen() {
     val prefs = remember { context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE) }
     // Состояния навигации
     var showOnboarding by remember { mutableStateOf(!prefs.getBoolean("onboarding_done", false)) }
-    var selectedItemIndex by remember { mutableStateOf(0) }
+    var selectedItemIndex by remember { mutableIntStateOf(0) }
     var selectedRecipe by remember { mutableStateOf<Recipe?>(null) }
     var isCooking by remember { mutableStateOf(false) }
     var showProfile by remember { mutableStateOf(false) }
@@ -77,7 +79,7 @@ fun MainScreen() {
     if (showOnboarding) {
         OnboardingScreen(onFinish = {
             // Запоминаем, что онбординг пройден
-            prefs.edit().putBoolean("onboarding_done", true).apply()
+            prefs.edit { putBoolean("onboarding_done", true) }
             showOnboarding = false
         })
         return

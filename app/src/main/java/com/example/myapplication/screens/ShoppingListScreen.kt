@@ -74,7 +74,7 @@ fun ShoppingListScreen() {
     // Группировка по категориям
     val groupedItems = shoppingItems.groupBy { it.category }
 
-    // --- СОСТОЯНИЯ ДЛЯ ДИАЛОГА ---
+    // Состояния для диалога
     var showAddDialog by remember { mutableStateOf(false) }
     var newItemName by remember { mutableStateOf("") }
     var newItemAmount by remember { mutableStateOf("") }
